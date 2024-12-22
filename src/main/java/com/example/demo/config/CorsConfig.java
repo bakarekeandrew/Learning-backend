@@ -1,21 +1,23 @@
-package com.example.demo.config; // Adjust this to match your project structure
+package com.example.demo.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-    @Value("${app.cors.allowed-origins}")
-    private String[] allowedOrigins;
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-            .allowedOrigins(allowedOrigins)
+            .allowedOrigins(
+                "http://localhost:3000",
+                "https://*.vercel.app",     // Allow all Vercel subdomains
+                "https://learning-backend-production-65eb.up.railway.app"  // Your specific Vercel domain
+            )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
-            .allowCredentials(true);
+            .exposedHeaders("*")  // Add this to expose any custom headers
+            .allowCredentials(true)
+            .maxAge(3600);  // Cache preflight requests for 1 hour
     }
 }
