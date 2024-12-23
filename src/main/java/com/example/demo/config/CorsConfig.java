@@ -11,8 +11,7 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
             .allowedOrigins(
                 "http://localhost:3000",
-                "https://*.vercel.app",     // Allow all Vercel subdomains
-                "https://learning-backend-production-65eb.up.railway.app"  // Your specific Vercel domain
+                "https://*.vercel.app"     // This covers your Vercel frontend domain
             )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
