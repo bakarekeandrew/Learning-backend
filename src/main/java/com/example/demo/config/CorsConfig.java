@@ -8,15 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-            .allowedOrigins(
-                "http://localhost:3000",
-                "https://*.vercel.app"     // This covers your Vercel frontend domain
-            )
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        registry.addMapping("/**")  // Change from /api/** to /**
+            .allowedOrigins("https://learning-backend-production-65eb.up.railway.app")  // Your specific Vercel domain
+            .allowedMethods("*")
             .allowedHeaders("*")
-            .exposedHeaders("*")  // Add this to expose any custom headers
-            .allowCredentials(true)
-            .maxAge(3600);  // Cache preflight requests for 1 hour
+            .allowCredentials(true);
     }
 }
