@@ -29,7 +29,12 @@ public class SecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        
+
+        System.out.println("CORS Configuration:");
+        System.out.println("Allowed Origins: " + configuration.getAllowedOrigins());
+        System.out.println("Allowed Methods: " + configuration.getAllowedMethods());
+        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
